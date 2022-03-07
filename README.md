@@ -368,12 +368,18 @@ The following are the most common constraints used in the MySQL:
 ##### JOIN
 - MySQL JOINS are used with SELECT statement. It is used to retrieve data from multiple tables. It is performed whenever you need to fetch records from two or more tables.
 - ``` SELECT columns  FROM table1   INNER JOIN table2  ON table1.column = table2.column;   ```
+
+
  ![INNER_JOIN_IMAGE](https://static.javatpoint.com/mysql/images/image1.png)
 
 - ``` SELECT columns  FROM table1  LEFT [OUTER] JOIN table2  ON table1.column = table2.column;   ```
+
+
   ![LEFT_JOIN_IMAGE](https://static.javatpoint.com/mysql/images/image4.png)
 
 - ``` SELECT columns  FROM table1  RIGHT [OUTER] JOIN table2  ON table1.column = table2.column;   ```
+
+
  ![RIGHT_JOIN_IMAGE](https://static.javatpoint.com/mysql/images/image7.png)
 
 
@@ -381,6 +387,8 @@ The following are the most common constraints used in the MySQL:
 ##### INNER JOIN
 - The MySQL Inner Join is used to returns only those results from the tables that match the specified condition and hides other rows and columns. MySQL assumes it as a default Join, so it is optional to use the Inner Join keyword with the query.- 
 - ``` SELECT columns  FROM table1   INNER JOIN table2  ON table1.column = table2.column;   ```
+
+
  ![INNER_JOIN_IMAGE](https://static.javatpoint.com/mysql/images/image1.png)
 
 
@@ -392,17 +400,25 @@ The following are the most common constraints used in the MySQL:
 - In other words, the Left Join clause returns all the rows from the left table and matched records from the right table or returns Null if no matching record found. This Join can also be called a Left Outer Join clause. So, Outer is the optional keyword to use with Left Join.
 
 - ``` SELECT columns  FROM table1  LEFT [OUTER] JOIN table2  ON table1.column = table2.column;   ```
+
+
   ![LEFT_JOIN_IMAGE](https://static.javatpoint.com/mysql/images/image4.png)
 
 ##### RIGHT JOIN
 
 - The Right Join is used to joins two or more tables and returns all rows from the right-hand table, and only those results from the other table that fulfilled the join condition. If it finds unmatched records from the left side table, it returns Null value. It is similar to the Left Join, except it gives the reverse result of the join tables. It is also known as Right Outer Join. So, Outer is the optional clause used with the Right Join.
 - ``` SELECT columns  FROM table1  RIGHT [OUTER] JOIN table2  ON table1.column = table2.column;   ```
+
+
  ![RIGHT_JOIN_IMAGE](https://static.javatpoint.com/mysql/images/image7.png)
 
 ##### CROSS JOIN
 - MySQL CROSS JOIN is used to combine all possibilities of the two or more tables and returns the result that contains every row from all contributing tables. The CROSS JOIN is also known as CARTESIAN JOIN, which provides the Cartesian product of all associated tables. The Cartesian product can be explained as all rows present in the first table multiplied by all rows present in the second table. It is similar to the Inner Join, where the join condition is not available with this clause.
+
+
 - ![CROSS_JOIN_IMAGE](https://static.javatpoint.com/mysql/images/mysql-cross-join.png) 
+
+
 ``` SELECT column-lists  FROM table1  CROSS JOIN table2;   ```
 
 
