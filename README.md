@@ -233,70 +233,173 @@ The following are the most common constraints used in the MySQL:
 
 
 ##### INSERT IGNORE
+- Insert Ignore statement in MySQL has a special feature that ignores the invalid rows whenever we are inserting single or multiple rows into a table. We can understand it with the following explanation, where a table contains a primary key column
+
+- ``` INSERT IGNORE INTO table_name (column_names) VALUES ( value_list), ( value_list) .....; ```
+
 ##### Insert Into Select
+
+- Sometimes we want to insert data of one table into the other table in the same or different database. It is not very easy to enter these data using the INSERT query manually. We can optimize this process with the use of MySQL INSERT INTO SELECT query. It allows us to populate the MySQL tables quickly. This section will cover the INSERT INTO SELECT command, syntax, and its use cases.
+- ```INSERT INTO table_name (column_list) VALUES (value_list);   ```
+- ```   INSERT INTO table_name2 SELECT * FROM table_name1 WHERE condition;   ```
+- ``` INSERT INTO table2 TABLE table1; ```
+- ``` INSERT INTO table_name2 (column_list)  SELECT column_list   FROM table_name1  WHERE condition;  ```
+
+- ```Ex:- INSERT INTO person_info (person_name, email, city)  SELECT name, email, city  FROM person  WHERE city = 'Texas';   ```
+ 
 
 ## Mysql Indexes
 
+- An index is a data structure that allows us to add indexes in the existing table. It enables you to improve the faster retrieval of records on a database table. It creates an entry for each value of the indexed columns. We use it to quickly find the record without searching each row in a database table whenever the table is accessed. We can create an index by using one or more columns of the table for efficient access to the records.
+
+- When a table is created with a primary key or unique key, it automatically creates a special index named PRIMARY. We called this index as a clustered index. All indexes other than PRIMARY indexes are known as a non-clustered index or secondary index.
 
 ##### CREATE Index
+- ``` CREATE INDEX [index_name] ON [table_name] (column names)   ```
+- ``` CREATE INDEX ind_1 ON t_index(col4);   ```
+
+> To see data in Details Way Use Explain Keyword Before query.
+``` EXPLAIN SELECT studentid, firstname, lastname FROM student WHERE class = 'CS'; ```
+
 ##### DROP Index
+
+- ```DROP INDEX index_name ON table_name [algorithm_option | lock_option];  ```
+- ``` Algorithm [=] {DEFAULT | INPLACE | COPY}   ```
+- COPY: This algorithm allows us to copy one table into another new table row by row and then DROP Index statement performed on this new table. On this table, we cannot perform an INSERT and UPDATE statement for data manipulation.
+
+- INPLACE: This algorithm allows us to rebuild a table instead of copy the original table. We can perform all data manipulation operations on this table. On this table, MySQL issues an exclusive metadata lock during the index removal.
+ 
+
+
 ##### SHOW Index
+
+- ``` SHOW INDEXES FROM table_name;   ```
+
+> If we want to get the index information of a table in a different database or database to which you are not connected, MySQL allows us to specify the database name with the Show Indexes statement. The following statement explains it more clearly:
+
+- ```mysql> SHOW INDEXES FROM table_name IN database_name;   ```
+- ``` OR ```
+- ``` SHOW INDEXES FROM database_name.table_name;   ```
+
 ##### UNIQUE Index
+- ```CREATE UNIQUE INDEX index_name ON table_name (index_column1, index_column2,...); ```
+
 ##### CLUSTERED Index
+
+- An index is a separate data structure that allows us to add indexes in the existing table. It enables you to improve the faster retrieval of records on a database table. It creates an entry for each value of the indexed columns.
+
+- A clustered index is actually a table where the data for the rows are stored. It defines the order of the table data based on the key values that can be sorted in only one way. In the database, each table can have only one clustered index. In a relational database, if the table column contains a primary key or unique key, MySQL allows you to create a clustered index named PRIMARY based on that specific column.
+
+- ``` CREATE TABLE `student_info` (  `studentid` int NOT NULL AUTO_INCREMENT,  `name` varchar(45) DEFAULT NULL,  `age` varchar(3) DEFAULT NULL,  `mobile` varchar(20) DEFAULT NULL,  `email` varchar(25) DEFAULT NULL,  PRIMARY KEY (`studentid`), //clustered index  UNIQUE KEY `email_UNIQUE` (`email`)) ```
 
 ## Mysql Clauses
 
 ##### WHERE KEYWORD
+- MySQL WHERE Clause is used with SELECT, INSERT, UPDATE and DELETE clause to filter the results. It specifies a specific position where you have to do the operation.
+
+- ```SELECT *  FROM officers  WHERE address = 'Mau';```
+- ``` SELECT *  FROM officers  WHERE address = 'Lucknow'  AND officer_id < 5;   ```
+- ```SELECT *  FROM officers  WHERE (address = 'Mau' AND officer_name = 'Ajeet')  OR (officer_id < 5); ```
+
+
+
 ##### DISTINCT KEYWORD
+- MySQL DISTINCT clause is used to remove duplicate records from the table and fetch only the unique records. The DISTINCT clause is only used with the SELECT statement.
+- ``` SELECT DISTINCT expressions  FROM tables  [WHERE conditions];   ```
+
 ##### FROM KEYWORD
+- The MySQL FROM Clause is used to select some records from a table. It can also be used to retrieve records from multiple tables using JOIN condition.
+- ``` FROM table1  [ { INNER JOIN | LEFT [OUTER] JOIN| RIGHT [OUTER] JOIN } table2  ON table1.column1 = table2.column1 ]   ``` 
+
+
 ##### ORDER BY KEYWORD
+
+- The MYSQL ORDER BY Clause is used to sort the records in ascending or descending order.
+- ``` SELECT expressions FROM tables  [WHERE conditions]  ORDER BY expression [ ASC | DESC ];   ```
+
+
 ##### GROUP BY KEYWORD
+
+- The MYSQL GROUP BY Clause is used to collect data from multiple records and group the result by one or more column. It is generally used in a SELECT statement.
+
+- You can also use some aggregate functions like COUNT, SUM, MIN, MAX, AVG etc. on the grouped column. 
+
+- ``` SELECT expression1, expression2, ... expression_n,   aggregate_function (expression)  FROM tables  [WHERE conditions]  GROUP BY expression1, expression2, ... expression_n;   ```
+
+- ``` SELECT emp_name, MIN/MAX/COUNT/AVG/SUM(working_hours) AS "Total working hours"  FROM employees  GROUP BY emp_name;   ```
+
+
 ##### HAVING
+- MySQL HAVING Clause is used with GROUP BY clause. It always returns the rows where condition is TRUE.
+
+-``` SELECT expression1, expression2, ... expression_n, aggregate_function (expression)  FROM tables  [WHERE conditions]  GROUP BY expression1, expression2, ... expression_n  HAVING condition;   ``` 
 
 ## Mysql Conditions
 
-##### AND
-##### OR
-##### AND OR 
-##### Boolean
-##### LIKE
-##### IN
-##### ANY
-##### Exists
-##### NOT
-##### Not Equal
-##### IS NULL
-##### IS NOT NULL
-##### BETWEEN
+- AND
+- OR
+- AND OR 
+- Boolean
+- LIKE
+- IN
+- ANY
+- Exists
+- NOT
+- Not Equal
+- IS NULL
+- IS NOT NULL
+- BETWEEN
 
 ## Mysql JOIN
-
+- MySQL JOINS are used with SELECT statement. It is used to retrieve data from multiple tables. It is performed whenever you need to fetch records from two or more tables.
 
 ##### JOIN
+- MySQL JOINS are used with SELECT statement. It is used to retrieve data from multiple tables. It is performed whenever you need to fetch records from two or more tables.
+- ``` SELECT columns  FROM table1   INNER JOIN table2  ON table1.column = table2.column;   ```
+ ![INNER_JOIN_IMAGE](https://static.javatpoint.com/mysql/images/image1.png)
+
+- ``` SELECT columns  FROM table1  LEFT [OUTER] JOIN table2  ON table1.column = table2.column;   ```
+  ![LEFT_JOIN_IMAGE](https://static.javatpoint.com/mysql/images/image4.png)
+
+- ``` SELECT columns  FROM table1  RIGHT [OUTER] JOIN table2  ON table1.column = table2.column;   ```
+ ![RIGHT_JOIN_IMAGE](https://static.javatpoint.com/mysql/images/image7.png)
+
+
+
 ##### INNER JOIN
+- The MySQL Inner Join is used to returns only those results from the tables that match the specified condition and hides other rows and columns. MySQL assumes it as a default Join, so it is optional to use the Inner Join keyword with the query.- 
+- ``` SELECT columns  FROM table1   INNER JOIN table2  ON table1.column = table2.column;   ```
+ ![INNER_JOIN_IMAGE](https://static.javatpoint.com/mysql/images/image1.png)
+
+
+
 ##### LEFT JOIN
+
+- The Left Join in MySQL is used to query records from multiple tables. This clause is similar to the Inner Join clause that can be used with a SELECT statement immediately after the FROM keyword. When we use the Left Join clause, it will return all the records from the first (left-side) table, even no matching records found from the second (right side) table. If it will not find any matches record from the right side table, then returns null.
+
+- In other words, the Left Join clause returns all the rows from the left table and matched records from the right table or returns Null if no matching record found. This Join can also be called a Left Outer Join clause. So, Outer is the optional keyword to use with Left Join.
+
+- ``` SELECT columns  FROM table1  LEFT [OUTER] JOIN table2  ON table1.column = table2.column;   ```
+  ![LEFT_JOIN_IMAGE](https://static.javatpoint.com/mysql/images/image4.png)
+
 ##### RIGHT JOIN
+
+- The Right Join is used to joins two or more tables and returns all rows from the right-hand table, and only those results from the other table that fulfilled the join condition. If it finds unmatched records from the left side table, it returns Null value. It is similar to the Left Join, except it gives the reverse result of the join tables. It is also known as Right Outer Join. So, Outer is the optional clause used with the Right Join.
+- ``` SELECT columns  FROM table1  RIGHT [OUTER] JOIN table2  ON table1.column = table2.column;   ```
+ ![RIGHT_JOIN_IMAGE](https://static.javatpoint.com/mysql/images/image7.png)
+
 ##### CROSS JOIN
-##### SELF JOIN
+- MySQL CROSS JOIN is used to combine all possibilities of the two or more tables and returns the result that contains every row from all contributing tables. The CROSS JOIN is also known as CARTESIAN JOIN, which provides the Cartesian product of all associated tables. The Cartesian product can be explained as all rows present in the first table multiplied by all rows present in the second table. It is similar to the Inner Join, where the join condition is not available with this clause.
+- ![CROSS_JOIN_IMAGE](https://static.javatpoint.com/mysql/images/mysql-cross-join.png) 
+``` SELECT column-lists  FROM table1  CROSS JOIN table2;   ```
+
+
 ##### DELETE JOIN
+
+- DELETE query is a sub-part of data manipulation language used for removing the rows from tables. How to delete join in MySQL is a very popular question during the interviews. It is not an easy process to use the delete join statements in MySQL. In this section, we are going to describe how you can delete records from multiple tables with the use of INNER JOIN or LEFT JOIN in the DELETE query.
+- ``` DELETE target table   FROM    table1    INNER JOIN table2  ON table1.joining_column= table2.joining_column  WHERE   condition   ```
+
 ##### UPDATE JOIN
-##### EQUAL JOIN
-##### NATURAL JOIN
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+- UPDATE query in MySQL is a DML statement used for modifying the data of a table. The UPDATE query must require the SET and WHERE clause. The SET clause is used to change the values of the column specified in the WHERE clause.
+``` UPDATE Tab1, Tab2, [INNER JOIN | LEFT JOIN] Tab1 ON Tab1.C1 = Tab2.C1  SET Tab1.C2 = Tab2.C2, Tab2.C3 = expression  WHERE Condition;   ```
