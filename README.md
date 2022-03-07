@@ -15,6 +15,8 @@ MySQL is a relational database management system based on the Structured Query L
 
     > Note: If we want to see more information on the user table, execute the command below:
     ``` DESC user;```
+    
+    
     > To get the selected information like as hostname, password expiration status, and account locking, execute the query as below:
     ```SELECT user, host, account_locked, password_expired FROM user;``` 
 
@@ -26,7 +28,9 @@ MySQL is a relational database management system based on the Structured Query L
 - ```create user sam@localhost identified by 'jtp12345'```  
 
 > Note:- Now, we will use the IF NOT EXISTS clause with the CREATE USER statement. 
-```CREATE USER IF NOT EXISTS adam@localhost IDENTIFIED BY 'jtp123456';  ```
+
+
+> ```CREATE USER IF NOT EXISTS adam@localhost IDENTIFIED BY 'jtp123456';  ```
 
 ##### Drop Users
 
@@ -52,15 +56,23 @@ MySQL server provides multiple types of privileges to a new user account. Some o
 - **UPDATE:** It enables the user account to update table rows.
 
 - If you want to give all privileges to a newly created user, execute the following command.
+
+
     ```GRANT ALL PRIVILEGES ON * . * TO peter@localhost; ```
 
 - If you want to give specific privileges to a newly created user, execute the following command.
+
+
     ```GRANT CREATE, SELECT, INSERT ON * . * TO peter@localhost;```  
 
 - Sometimes, you want to flush all the privileges of a user account for changes occurs immediately, type the following command.
+
+
     ```FLUSH PRIVILEGES;```  
 
 - If you want to see the existing privileges for the user, execute the following command.
+
+
     ```SHOW GRANTS for username;```  
 
 ## Table Query
